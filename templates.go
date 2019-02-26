@@ -21,6 +21,9 @@ type Template struct {
 	AssociatedServerId int64
 	// Active: Indicates that this template may be used for sending email.
 	Active bool
+
+	// TemplateAlias: An alternative template identifier.
+	TemplateAlias string
 }
 
 // TemplateInfo is a limited set of template info returned via Index/Editing endpoints
@@ -31,17 +34,20 @@ type TemplateInfo struct {
 	Name string
 	// Active: Indicates that this template may be used for sending email.
 	Active bool
+
+	// TemplateAlias: An alternative template identifier.
+	TemplateAlias string
 }
 
 ///////////////////////////////////////
 ///////////////////////////////////////
 
 // GetTemplate fetches a specific template via TemplateID
-func (client *Client) GetTemplate(templateID string) (Template, error) {
+func (client *Client) GetTemplate(templateIDOrAlias string) (Template, error) {
 	res := Template{}
 	err := client.doRequest(parameters{
 		Method:    "GET",
-		Path:      fmt.Sprintf("templates/%s", templateID),
+		Path:      fmt.Sprintf("templates/%s", templateIDOrAlias),
 		TokenType: server_token,
 	}, &res)
 	return res, err
@@ -199,6 +205,9 @@ type TemplatedEmail struct {
 	TrackOpens bool `json:",omitempty"`
 	// Attachments: List of attachments
 	Attachments []Attachment `json:",omitempty"`
+
+	// TemplateAlias: An alternative template identifier.
+	TemplateAlias string
 }
 
 // SendTemplatedEmail sends an email using a template (TemplateId)
