@@ -23,7 +23,7 @@ type Template struct {
 	Active bool
 
 	// TemplateAlias: An alternative template identifier.
-	TemplateAlias string
+	Alias string
 }
 
 // TemplateInfo is a limited set of template info returned via Index/Editing endpoints
@@ -36,7 +36,7 @@ type TemplateInfo struct {
 	Active bool
 
 	// TemplateAlias: An alternative template identifier.
-	TemplateAlias string
+	Alias string
 }
 
 ///////////////////////////////////////
